@@ -1,0 +1,21 @@
+# Configurações locais do editor.
+.vscode/
+
+# Pacotes de entrega e arquivos temporários.
+*.zip
+*.tmp
+*.temp
+*.log
+*.bak
+*~
+~$*
+
+# Arquivos locais do sistema operacional.
+.DS_Store
+Thumbs.db
+
+# Configurações privadas e credenciais locais, caso sejam criadas futuramente.
+.env
+.env.*
+*.pem
+*.key

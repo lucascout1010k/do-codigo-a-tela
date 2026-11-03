@@ -1,0 +1,1900 @@
+/* Fontes externas usadas pelos textos e exemplos de código. */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/* CONFIGURAÇÕES GERAIS — variáveis, base e textura */
+/* Define as variáveis de cores e fontes reutilizadas na página. */
+:root {
+  --bg: #08090d;
+  --text: #f3f3f5;
+  --muted: #9699a5;
+  --line: rgba(255,255,255,.12);
+  --lime: #c6ff4d;
+  --violet: #9b86ff;
+  --cyan: #78e7e9;
+  --main: 'Manrope',Inter,system-ui,sans-serif;
+  --mono: 'DM Mono',Consolas,monospace
+}
+
+/* Inclui bordas e preenchimentos no cálculo das dimensões. */
+* {
+  box-sizing: border-box
+}
+
+/* Configura a rolagem suave e o fundo do documento. */
+html {
+  scroll-behavior: smooth;
+  background: var(--bg)
+}
+
+/* Define a aparência geral e evita rolagem horizontal. */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--main);
+  overflow-x: hidden
+}
+
+/* Faz os links herdarem a cor do contexto e retira o sublinhado. */
+a {
+  color: inherit;
+  text-decoration: none
+}
+
+/* Personaliza as cores do texto selecionado. */
+::selection {
+  background: var(--lime);
+  color: #08090d
+}
+
+/* Sobrepõe uma textura sutil; não captura cliques e fica acima das demais camadas. */
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+}
+
+
+/* CABEÇALHO E NAVEGAÇÃO */
+/* Posiciona o cabeçalho no topo; flex distribui os itens na horizontal. */
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 82px;
+  padding: 0 5.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,.08)
+}
+
+/* Alinha o símbolo e o nome da marca. */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .13em
+}
+
+/* Usa grid para centralizar o símbolo dentro do círculo. */
+.brand>span:first-child {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border: 1px solid #c6ff4d66;
+  border-radius: 50%;
+  color: var(--lime);
+  font-size: 17px
+}
+
+/* Aplica a fonte monoespaçada e o espaçamento de letras aos elementos relacionados. */
+.topbar p,.nav-link,.hero-bottom,.eyebrow,.scroll-cue,.stage-top,.stage-bottom,footer,.panel-head,.panel-foot,th {
+  font-family: var(--mono);
+  letter-spacing: .07em
+}
+
+/* Estiliza a identificação da experiência no cabeçalho. */
+.topbar p {
+  font-size: 9px;
+  color: #777b89
+}
+
+/* Destaca os detalhes do cabeçalho. */
+.topbar p b,.nav-link span {
+  color: var(--lime);
+  font-weight: 400
+}
+
+/* Estiliza o link de navegação para os conceitos. */
+.nav-link {
+  font-size: 9px;
+  color: #c5c7cf
+}
+
+/* Separa a seta do texto do link. */
+.nav-link span {
+  margin-left: 8px
+}
+
+
+/* HERO — apresentação inicial e convite de rolagem */
+/* Organiza a apresentação inicial; position relative serve de referência às decorações. */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 145px 10vw 100px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate
+}
+
+/* Desenha a grade decorativa sobre a área disponível, sem capturar cliques. */
+.grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(transparent,black 15%,black 80%,transparent)
+}
+
+/* Cria o brilho de fundo; z-index negativo o mantém atrás do conteúdo. */
+.hero:before {
+  content: "";
+  position: absolute;
+  width: 650px;
+  height: 650px;
+  right: 0;
+  top: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle,#806cff1b,transparent 68%);
+  z-index: -1
+}
+
+/* Limita a largura do texto e o coloca à frente da ilustração. */
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  width: 56%;
+  max-width: 720px
+}
+
+/* Alinha o marcador e o pequeno texto de identificação. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a3a6b2;
+  font-size: 9px
+}
+
+/* Desenha o ponto luminoso e impede que ele encolha no flex. */
+.eyebrow i {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 12px #c6ff4d99
+}
+
+/* Define tamanho, espaçamento e peso do título principal. */
+.hero h1 {
+  font-size: clamp(70px,9.5vw,145px);
+  line-height: .91;
+  letter-spacing: -.09em;
+  font-weight: 600;
+  margin: 30px 0 25px
+}
+
+/* Destaca trechos dos títulos com a cor principal. */
+.hero h1 em,.section-head h2 em,.final-card h2 em {
+  font-style: normal;
+  color: var(--lime)
+}
+
+/* Define a largura e a legibilidade do texto de apresentação. */
+.intro {
+  max-width: 420px;
+  color: #a6a8b3;
+  font-size: 15px;
+  line-height: 1.85
+}
+
+/* Alinha o convite para rolar a página e seus símbolos. */
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+  font-size: 9px
+}
+
+/* Destaca a seta do convite de rolagem. */
+.scroll-cue b {
+  font-size: 16px;
+  color: var(--lime);
+  font-weight: 400;
+  margin-left: 5px
+}
+
+/* Desenha o contorno do indicador de rolagem. */
+.mouse {
+  width: 22px;
+  height: 33px;
+  border: 1px solid #ffffff66;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px
+}
+
+/* Desenha e anima o detalhe interno do indicador de rolagem. */
+.mouse i {
+  width: 3px;
+  height: 7px;
+  background: var(--lime);
+  border-radius: 4px;
+  animation: mouse 1.3s ease-in-out infinite
+}
+
+/* Animações: move e suaviza o detalhe do indicador no meio do ciclo. */
+@keyframes mouse {
+  /* Define o estado intermediário da animação. */
+  50% {
+    transform: translateY(7px);
+    opacity: .4
+  }
+}
+
+
+/* HERO — ilustração, órbitas e cartões */
+/* Posiciona a ilustração inicial; transform ajusta seu alinhamento vertical. */
+.hero-art {
+  position: absolute;
+  width: min(53vw,760px);
+  height: min(53vw,760px);
+  min-width: 470px;
+  min-height: 470px;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-48%);
+  z-index: 1
+}
+
+/* Cria o brilho difuso atrás do símbolo central. */
+.hero-glow {
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background: radial-gradient(circle,#c6ff4d20,#806cff20 42%,transparent 70%);
+  filter: blur(18px)
+}
+
+/* Centraliza o símbolo com grid e aplica a animação de flutuação. */
+.hero-core {
+  position: absolute;
+  width: 28%;
+  aspect-ratio: 1;
+  left: 36%;
+  top: 36%;
+  display: grid;
+  place-items: center;
+  border-radius: 30%;
+  border: 1px solid #c6ff4d88;
+  background: linear-gradient(145deg,#c6ff4d25,#7466ff20);
+  box-shadow: inset 0 0 55px #c6ff4d12,0 0 90px #c6ff4d0e;
+  color: var(--lime);
+  font: clamp(28px,4vw,55px) var(--mono);
+  transform: rotate(-14deg);
+  animation: float 7s ease-in-out infinite
+}
+
+/* Animações: varia a rotação e a altura do símbolo central. */
+@keyframes float {
+  /* Define o estado intermediário da animação. */
+  50% {
+    transform: rotate(-7deg) translateY(-13px)
+  }
+}
+
+/* Centraliza os anéis; transform desloca metade de suas próprias dimensões. */
+.orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid #ffffff22;
+  border-radius: 50%;
+  transform: translate(-50%,-50%)
+}
+
+/* Define o tamanho e a cor do primeiro anel. */
+.orbit-a {
+  width: 47%;
+  height: 47%;
+  border-color: #c6ff4d44
+}
+
+/* Inclina e achata o segundo anel com transform. */
+.orbit-b {
+  width: 67%;
+  height: 67%;
+  transform: translate(-50%,-50%) rotate(35deg) scaleY(.64);
+  border-color: #9b86ff55
+}
+
+/* Configura o anel tracejado e sua rotação contínua. */
+.orbit-c {
+  width: 83%;
+  height: 83%;
+  transform: translate(-50%,-50%) rotate(-30deg) scaleY(.55);
+  border-style: dashed;
+  animation: spin 36s linear infinite
+}
+
+/* Animações: define o estado final da rotação do anel tracejado. */
+@keyframes spin {
+  /* Define o estado final da animação. */
+  to {
+    transform: translate(-50%,-50%) rotate(330deg) scaleY(.55)
+  }
+}
+
+/* Posiciona os cartões de tecnologias sobre a ilustração. */
+.chip {
+  position: absolute;
+  padding: 11px 14px;
+  border: 1px solid #ffffff24;
+  border-radius: 6px;
+  background: #0e0f15df;
+  backdrop-filter: blur(12px);
+  font: 10px var(--mono);
+  box-shadow: 0 12px 35px #0003
+}
+
+/* Desenha o marcador colorido dos cartões. */
+.chip i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  margin-right: 7px
+}
+
+/* Estiliza a descrição menor de cada cartão. */
+.chip small {
+  display: block;
+  margin: 6px 0 0 13px;
+  color: #7c808d;
+  font-size: 8px
+}
+
+/* Posiciona e inclina o cartão de HTML. */
+.chip-a {
+  left: 13%;
+  top: 23%;
+  transform: rotate(-7deg)
+}
+
+/* Posiciona e inclina o cartão de CSS. */
+.chip-b {
+  right: 8%;
+  top: 40%;
+  transform: rotate(5deg)
+}
+
+/* Aplica a cor de CSS ao marcador. */
+.chip-b i {
+  background: var(--violet)
+}
+
+/* Posiciona e inclina o cartão de interface. */
+.chip-c {
+  left: 28%;
+  bottom: 14%;
+  transform: rotate(4deg)
+}
+
+/* Aplica a cor de interface ao marcador. */
+.chip-c i {
+  background: var(--cyan)
+}
+
+/* Distribui as legendas na faixa inferior da apresentação. */
+.hero-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  padding: 0 5.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #ffffff12;
+  color: #707482;
+  font-size: 8px
+}
+
+/* Destaca o ponto da legenda inferior. */
+.hero-bottom b {
+  color: var(--lime);
+  margin-left: 8px
+}
+
+
+/* NARRATIVA — palco fixo, progresso e textos */
+/* Reserva a altura que permite percorrer as quatro cenas ao rolar. */
+.story {
+  height: 480vh;
+  position: relative;
+  background: var(--bg)
+}
+
+/* Mantém o palco preso ao topo com sticky enquanto a narrativa é percorrida. */
+.stage {
+  --orb-scale: 1;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 75% 50%,#6b58cf12,transparent 43%),#08090d;
+  isolation: isolate
+}
+
+/* Sobrepõe um degradê para dar contraste ao texto sem bloquear cliques. */
+.stage:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,#08090df7 0%,#08090dd9 32%,#08090d20 70%,#08090d44);
+  z-index: 1;
+  pointer-events: none
+}
+
+/* Suaviza a grade decorativa do palco. */
+.stage>.grid {
+  opacity: .35
+}
+
+/* Alinha os indicadores superiores e os coloca acima das ilustrações com z-index. */
+.stage-top {
+  position: absolute;
+  top: 34px;
+  left: 5.5vw;
+  right: 5.5vw;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 6;
+  color: #8c909c;
+  font-size: 8px
+}
+
+/* Destaca o número da cena atual. */
+.stage-top b {
+  color: #f4f4f6;
+  font-weight: 400
+}
+
+/* Define a trilha da barra; flex permite ocupar o espaço disponível. */
+.track {
+  height: 1px;
+  background: #ffffff20;
+  flex: 1;
+  max-width: 330px
+}
+
+/* Desenha a parte preenchida da barra, cuja largura é atualizada pelo JavaScript. */
+.track i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--lime);
+  box-shadow: 0 0 10px #c6ff4d99
+}
+
+/* Posiciona os textos da cena acima das camadas visuais. */
+.story-copy {
+  position: absolute;
+  left: 10vw;
+  top: 27%;
+  width: min(37%,490px);
+  z-index: 5
+}
+
+/* Define a tipografia do título da narrativa. */
+.story-copy h2 {
+  font-size: clamp(36px,4.1vw,66px);
+  line-height: 1.04;
+  letter-spacing: -.07em;
+  font-weight: 600;
+  margin: 23px 0 17px
+}
+
+/* Estiliza a explicação da cena. */
+.story-copy>p:last-of-type {
+  max-width: 365px;
+  color: #a1a4af;
+  font-size: 14px;
+  line-height: 1.85;
+  margin: 0
+}
+
+/* Distribui os quatro marcadores de cena em linha. */
+.steps {
+  display: flex;
+  gap: 7px;
+  margin-top: 32px
+}
+
+/* Desenha os marcadores e suaviza suas mudanças. */
+.steps i {
+  display: block;
+  width: 19px;
+  height: 3px;
+  background: #ffffff30;
+  transition: all .3s
+}
+
+/* Destaca o marcador da cena selecionada pelo JavaScript. */
+.steps i.active {
+  width: 38px;
+  background: var(--lime)
+}
+
+
+/* NARRATIVA — símbolo e anéis */
+/* Define a área das ilustrações e seu alinhamento no palco. */
+.visual {
+  position: absolute;
+  z-index: 2;
+  width: min(58vw,880px);
+  height: min(70vh,680px);
+  min-height: 450px;
+  right: 4vw;
+  top: 50%;
+  transform: translateY(-48%)
+}
+
+/* Posiciona o símbolo da narrativa e suaviza mudanças de opacidade. */
+.orb {
+  position: absolute;
+  left: 31%;
+  top: 8%;
+  width: 42%;
+  aspect-ratio: 1;
+  transition: opacity .2s
+}
+
+/* Centraliza e estiliza o núcleo do símbolo da narrativa. */
+.orb-core {
+  position: absolute;
+  inset: 25%;
+  border-radius: 30%;
+  display: grid;
+  place-items: center;
+  transform: rotate(25deg);
+  border: 1px solid #c6ff4d99;
+  background: radial-gradient(circle at 30% 25%,#c6ff4d38,#715add26 50%,#090a0f66);
+  box-shadow: inset 0 0 50px #c6ff4d14,0 0 80px #7d68ff22;
+  color: var(--lime);
+  font: clamp(26px,3vw,46px) var(--mono)
+}
+
+/* Desenha um anel inclinado e achatado ao redor do núcleo. */
+.orb-ring {
+  position: absolute;
+  inset: 8%;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  transform: rotate(25deg) scaleY(.45);
+  border-color: #c6ff4d55
+}
+
+/* Varia a inclinação e a cor do segundo anel. */
+.orb-ring.second {
+  transform: rotate(-45deg) scaleY(.6);
+  border-color: #9b86ff66
+}
+
+/* Desenha o pequeno ponto luminoso da narrativa. */
+.particle {
+  position: absolute;
+  top: 14%;
+  left: 16%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 18px var(--lime)
+}
+
+
+/* NARRATIVA — painéis de código e página simulada */
+/* Compartilha bordas, fundo e sombra entre os painéis e a janela simulada. */
+.code,.browser {
+  position: absolute;
+  border: 1px solid #ffffff24;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #101218ed;
+  box-shadow: 0 30px 80px #0006;
+  backdrop-filter: blur(16px)
+}
+
+/* Define a largura e a camada dos painéis de código. */
+.code {
+  width: 43%;
+  z-index: 3
+}
+
+/* Posiciona o painel de exemplo de HTML. */
+.html-panel {
+  left: 0;
+  top: 9%
+}
+
+/* Posiciona o painel de exemplo de CSS. */
+.css-panel {
+  right: 0;
+  top: 19%
+}
+
+/* Alinha os elementos do cabeçalho dos painéis. */
+.panel-head {
+  height: 39px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff08;
+  border-bottom: 1px solid #ffffff12;
+  color: #a2a5b0;
+  font-size: 8px
+}
+
+/* Estiliza os pontos que simulam controles de janela. */
+.lights {
+  color: #f17b79;
+  font-size: 9px;
+  letter-spacing: 1px
+}
+
+/* Desenha a etiqueta da tecnologia; a margem automática a empurra para a direita. */
+.panel-head b {
+  margin-left: auto;
+  color: var(--lime);
+  border: 1px solid #c6ff4d44;
+  padding: 3px 5px;
+  border-radius: 3px;
+  font-size: 7px;
+  font-weight: 400
+}
+
+/* Aplica a cor de CSS à etiqueta do painel. */
+.css-panel .panel-head b {
+  color: #b6a8ff;
+  border-color: #9b86ff55
+}
+
+/* Define o espaçamento interno dos exemplos de código. */
+.code-lines {
+  padding: 14px 12px 9px
+}
+
+/* Formata cada linha do exemplo e impede quebra de texto. */
+.code-lines p {
+  margin: 0 0 9px;
+  white-space: nowrap;
+  font: clamp(7px,.75vw,10px) var(--mono);
+  color: #e3e5ed
+}
+
+/* Reserva espaço para os números das linhas. */
+.code-lines small {
+  display: inline-block;
+  width: 22px;
+  color: #555a68;
+  font-size: 8px
+}
+
+/* Destaca as tags no exemplo de HTML. */
+.code-lines span {
+  color: #b9a6ff
+}
+
+/* Destaca o seletor no exemplo de CSS. */
+.css-panel .code-lines strong {
+  color: #8ec8ff;
+  font-weight: 400
+}
+
+/* Destaca as propriedades no exemplo de CSS. */
+.css-panel .code-lines em {
+  font-style: normal;
+  color: #ff9ad5
+}
+
+/* Destaca os valores no exemplo de CSS. */
+.code-lines label {
+  color: #baf17c
+}
+
+/* Estiliza o status na base dos painéis. */
+.panel-foot {
+  padding: 9px 12px;
+  border-top: 1px solid #ffffff10;
+  color: #888c98;
+  font-size: 7px
+}
+
+/* Destaca o primeiro símbolo do status. */
+.panel-foot:first-letter {
+  color: var(--lime)
+}
+
+/* Aplica a cor de CSS ao status correspondente. */
+.panel-foot.purple {
+  color: #9e91e9
+}
+
+/* Posiciona a janela simulada; ela começa transparente e aparece pelo JavaScript. */
+.browser {
+  width: 76%;
+  left: 12%;
+  bottom: 0;
+  z-index: 4;
+  opacity: 0;
+  transform-origin: center bottom
+}
+
+/* Distribui os controles e o endereço da janela simulada. */
+.browser-head {
+  height: 35px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #191b25;
+  border-bottom: 1px solid #ffffff16
+}
+
+/* Desenha a barra de endereço e permite que ela ocupe o espaço livre. */
+.browser-head>div {
+  flex: 1;
+  max-width: 220px;
+  margin: auto;
+  text-align: center;
+  padding: 5px;
+  background: #0003;
+  border: 1px solid #ffffff0d;
+  border-radius: 4px;
+  color: #858998;
+  font: 8px var(--mono)
+}
+
+/* Estiliza o menu da janela simulada. */
+.browser-head>b {
+  font-size: 9px;
+  color: #777b88
+}
+
+/* Define o fundo e o preenchimento da página simulada. */
+.browser-page {
+  padding: 17px 21px 18px;
+  background: linear-gradient(135deg,#171a23,#101218)
+}
+
+/* Alinha os elementos da navegação ilustrativa. */
+.mock-nav {
+  display: flex;
+  align-items: center;
+  gap: 9px
+}
+
+/* Define o tamanho da marca ilustrativa. */
+.mock-nav b {
+  font-size: 9px
+}
+
+/* Desenha o símbolo inclinado da marca ilustrativa. */
+.mock-nav b i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--lime);
+  transform: rotate(45deg);
+  margin-right: 4px
+}
+
+/* Desenha os traços que representam links de navegação. */
+.mock-nav>span {
+  width: 22px;
+  height: 3px;
+  border-radius: 3px;
+  background: #454958;
+  margin-left: auto
+}
+
+/* Ajusta os traços que vêm depois do primeiro. */
+.mock-nav>span+span {
+  margin-left: 0;
+  width: 26px
+}
+
+/* Desenha o botão ilustrativo da navegação. */
+.mock-nav>label {
+  width: 43px;
+  height: 13px;
+  border-radius: 3px;
+  background: var(--lime);
+  margin-left: 6px
+}
+
+/* Usa grid para dividir a apresentação simulada em duas colunas. */
+.mock-hero {
+  display: grid;
+  grid-template-columns: 1fr .9fr;
+  gap: 14px;
+  align-items: center;
+  padding: 20px 2px 14px
+}
+
+/* Estiliza a identificação menor da página simulada. */
+.mock-hero small {
+  font: 6px var(--mono);
+  color: #9da2b2
+}
+
+/* Desenha os traços que representam o título. */
+.mock-hero h3 {
+  height: 10px;
+  width: 90%;
+  margin: 10px 0 5px;
+  background: #e9ebf1;
+  border-radius: 2px
+}
+
+/* Varia a largura e a cor da segunda linha do título. */
+.mock-hero h3.short {
+  width: 65%;
+  background: var(--lime);
+  margin-top: 0
+}
+
+/* Desenha os traços que representam parágrafos. */
+.mock-hero p {
+  height: 3px;
+  width: 90%;
+  background: #505565;
+  border-radius: 3px;
+  margin: 10px 0 0
+}
+
+/* Encurta a segunda linha do parágrafo ilustrativo. */
+.mock-hero p.short {
+  width: 58%;
+  margin-top: 5px
+}
+
+/* Desenha o botão da página simulada. */
+.mock-hero button {
+  display: block;
+  width: 60px;
+  height: 16px;
+  margin-top: 13px;
+  background: #c6ff4d22;
+  border: 1px solid #c6ff4d88;
+  border-radius: 3px
+}
+
+/* Define o quadro e o brilho da ilustração simulada. */
+.mock-art {
+  height: 118px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  background: radial-gradient(circle,#c6ff4d33,#826dff2b 38%,#ffffff08 70%)
+}
+
+/* Posiciona os anéis no centro da ilustração simulada. */
+.mock-art i,.mock-art b {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #c6ff4d99;
+  border-radius: 50%;
+  transform: translate(-50%,-50%) rotate(35deg) scaleY(.5)
+}
+
+/* Varia a inclinação e a cor do segundo anel simulado. */
+.mock-art b {
+  transform: translate(-50%,-50%) rotate(-40deg) scaleY(.65);
+  border-color: #9b86ffcc
+}
+
+/* Posiciona o símbolo decorativo na ilustração. */
+.mock-art span {
+  position: absolute;
+  right: 15%;
+  top: 12%;
+  color: var(--lime)
+}
+
+/* Distribui três cartões ilustrativos em colunas com grid. */
+.mock-cards {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px
+}
+
+/* Desenha os cartões e serve de referência para seus detalhes. */
+.mock-cards i {
+  height: 42px;
+  border: 1px solid #ffffff18;
+  border-radius: 4px;
+  background: linear-gradient(135deg,#ffffff08,#ffffff02);
+  position: relative
+}
+
+/* Desenha a primeira linha de texto ilustrativo dos cartões. */
+.mock-cards i:before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 9px;
+  width: 45%;
+  height: 3px;
+  background: #a0a4b1
+}
+
+/* Desenha a segunda linha de texto ilustrativo dos cartões. */
+.mock-cards i:after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 18px;
+  width: 68%;
+  height: 2px;
+  background: #454958
+}
+
+
+/* NARRATIVA — legendas inferiores */
+/* Distribui as legendas inferiores acima das camadas visuais. */
+.stage-bottom {
+  position: absolute;
+  bottom: 26px;
+  left: 5.5vw;
+  right: 5.5vw;
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #747886;
+  font-size: 8px
+}
+
+/* Destaca os sinais que unem as tecnologias. */
+.stage-bottom b {
+  color: var(--lime);
+  font-weight: 400;
+  padding: 0 4px
+}
+
+/* Define a cor da orientação para continuar rolando. */
+.hint {
+  color: #8b8e9a
+}
+
+
+/* SEÇÃO DE CONCEITOS E TABELA */
+/* Define o fundo, o espaçamento e a borda da seção de conceitos. */
+.concepts {
+  position: relative;
+  padding: 125px 10vw 80px;
+  background: #0c0d12;
+  border-top: 1px solid #c6ff4d44
+}
+
+/* Limita a largura da introdução aos conceitos. */
+.section-head {
+  max-width: 730px
+}
+
+/* Define a tipografia do título da seção. */
+.section-head h2 {
+  font-size: clamp(48px,6.5vw,92px);
+  line-height: .99;
+  letter-spacing: -.08em;
+  font-weight: 600;
+  margin: 24px 0 20px
+}
+
+/* Formata o parágrafo de apresentação dos conceitos. */
+.section-head>p:last-child {
+  max-width: 530px;
+  color: #9b9eaa;
+  font-size: 14px;
+  line-height: 1.9
+}
+
+/* Permite rolagem horizontal da tabela quando faltar espaço. */
+.table-wrap {
+  margin-top: 55px;
+  border-top: 1px solid #ffffff24;
+  overflow-x: auto
+}
+
+/* Organiza a tabela, une as bordas e mantém sua largura mínima. */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 620px
+}
+
+/* Estiliza os cabeçalhos das colunas. */
+th {
+  padding: 18px 15px;
+  border-bottom: 1px solid #ffffff20;
+  color: #777b89;
+  font-size: 8px;
+  font-weight: 400
+}
+
+/* Retira o preenchimento à esquerda da primeira coluna. */
+th:first-child,td:first-child {
+  padding-left: 0
+}
+
+/* Define espaçamento, bordas e texto das células. */
+td {
+  padding: 23px 15px;
+  border-bottom: 1px solid #ffffff14;
+  color: #adb0bc;
+  font-size: 12px;
+  line-height: 1.6
+}
+
+/* Estiliza a numeração das tecnologias. */
+td small {
+  font: 9px var(--mono);
+  color: #696d7a;
+  margin-right: 16px
+}
+
+/* Alinha o ícone e o nome de cada tecnologia. */
+td b {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #f0f1f5
+}
+
+/* Centraliza os símbolos dentro dos ícones com grid. */
+td b i {
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #ffffff22;
+  border-radius: 5px;
+  font: 10px var(--mono);
+  font-style: normal;
+  color: var(--lime)
+}
+
+/* Aplica a cor de CSS ao ícone correspondente. */
+td b .css-icon {
+  color: var(--violet)
+}
+
+/* Aplica a cor e o tamanho do ícone de JavaScript. */
+td b .js-icon {
+  color: var(--cyan);
+  font-size: 8px
+}
+
+/* Estiliza os exemplos da tabela e evita que sejam quebrados em linhas. */
+code {
+  font: 9px var(--mono);
+  color: var(--lime);
+  background: #c6ff4d0d;
+  padding: 7px 8px;
+  border: 1px solid #c6ff4d22;
+  border-radius: 4px;
+  white-space: nowrap
+}
+
+
+/* ENCERRAMENTO E LINK DE RETORNO */
+/* Define o cartão de encerramento e limita suas decorações à área interna. */
+.final-card {
+  position: relative;
+  min-height: 380px;
+  margin-top: 110px;
+  padding: clamp(28px,5vw,65px);
+  border: 1px solid #ffffff20;
+  border-radius: 11px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 90% 48%,#7c68ff20,transparent 42%),linear-gradient(120deg,#11131a,#0c0d12)
+}
+
+/* Sobrepõe a grade decorativa do cartão sem capturar cliques. */
+.final-card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(90deg,black,transparent)
+}
+
+/* Mantém os textos e o link acima da grade com z-index. */
+.final-card>.eyebrow,.final-card h2,.final-card>p:not(.eyebrow),.restart {
+  position: relative;
+  z-index: 2
+}
+
+/* Alinha a contagem final à direita. */
+.final-card>.eyebrow span {
+  margin-left: auto;
+  color: #777b89
+}
+
+/* Define a tipografia do título de encerramento. */
+.final-card h2 {
+  font-size: clamp(38px,5.2vw,72px);
+  line-height: 1.03;
+  letter-spacing: -.075em;
+  font-weight: 600;
+  margin: 28px 0 18px
+}
+
+/* Formata o parágrafo explicativo do encerramento. */
+.final-card>p:not(.eyebrow) {
+  max-width: 520px;
+  color: #9b9eaa;
+  font-size: 13px;
+  line-height: 1.85
+}
+
+/* Alinha e estiliza o link de retorno, suavizando suas mudanças. */
+.restart {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 20px;
+  padding: 13px 15px;
+  border: 1px solid #c6ff4d66;
+  border-radius: 4px;
+  color: var(--lime);
+  font: 9px var(--mono);
+  transition: .2s
+}
+
+/* Estiliza a seta de retorno. */
+.restart b {
+  font-size: 15px;
+  font-weight: 400
+}
+
+/* Muda as cores do link quando o ponteiro passa sobre ele. */
+.restart:hover {
+  background: var(--lime);
+  color: #08090d
+}
+
+/* Posiciona o conjunto de anéis decorativos do encerramento. */
+.final-orbit {
+  position: absolute;
+  width: 370px;
+  height: 370px;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #c6ff4d30;
+  border-radius: 50%
+}
+
+/* Desenha os anéis internos com pseudo-elementos. */
+.final-orbit:before,.final-orbit:after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid #9b86ff40;
+  border-radius: 50%;
+  transform: rotate(45deg) scaleY(.55)
+}
+
+/* Varia o tamanho e a inclinação de um dos anéis internos. */
+.final-orbit:after {
+  inset: 23%;
+  border-color: #c6ff4d40;
+  transform: rotate(-35deg) scaleY(.6)
+}
+
+/* Desenha o quadrado inclinado no centro dos anéis. */
+.final-orbit i {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%) rotate(45deg);
+  border: 1px solid #c6ff4d77;
+  border-radius: 27px;
+  background: #c6ff4d12
+}
+
+/* Desenha o ponto luminoso dos anéis. */
+.final-orbit b {
+  position: absolute;
+  left: 24%;
+  top: 18%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 16px var(--lime)
+}
+
+
+/* RODAPÉ */
+/* Distribui a marca e os textos do rodapé com flex. */
+footer {
+  min-height: 82px;
+  padding: 20px 5.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid #ffffff12;
+  color: #6e7280;
+  font-size: 8px
+}
+
+/* Ajusta a tipografia da marca no rodapé. */
+footer .brand {
+  font-family: var(--main);
+  font-size: 11px;
+  color: #d9dbe2
+}
+
+/* Destaca a seta no rodapé. */
+footer>span b {
+  color: var(--lime);
+  font-weight: 400;
+  margin-left: 5px
+}
+
+
+/* RESPONSIVIDADE — telas de até 1000 px */
+/* Media query: aplica os ajustes abaixo somente até esta largura de tela. */
+@media(max-width:1000px) {
+  /* Ajusta .hero para esta condição de tela. */
+  .hero {
+    padding-left: 7vw
+  }
+  /* Ajusta .hero-copy para esta condição de tela. */
+  .hero-copy {
+    width: 60%
+  }
+  /* Ajusta .hero-art para esta condição de tela. */
+  .hero-art {
+    right: -17%;
+    opacity: .82
+  }
+  /* Ajusta .story-copy para esta condição de tela. */
+  .story-copy {
+    left: 6vw;
+    width: 37%
+  }
+  /* Ajusta .story-copy h2 para esta condição de tela. */
+  .story-copy h2 {
+    font-size: clamp(34px,4.4vw,52px)
+  }
+  /* Ajusta .visual para esta condição de tela. */
+  .visual {
+    width: 64vw;
+    right: 1vw
+  }
+  /* Ajusta .concepts para esta condição de tela. */
+  .concepts {
+    padding-left: 7vw;
+    padding-right: 7vw
+  }
+}
+
+
+/* RESPONSIVIDADE — telas de até 700 px */
+/* Media query: aplica os ajustes abaixo somente até esta largura de tela. */
+@media(max-width:700px) {
+  /* Ajusta .topbar para esta condição de tela. */
+  .topbar {
+    height: 66px;
+    padding: 0 20px
+  }
+  /* Ajusta .topbar p para esta condição de tela. */
+  .topbar p {
+    display: none
+  }
+  /* Ajusta .nav-link para esta condição de tela. */
+  .nav-link {
+    font-size: 8px
+  }
+  /* Ajusta .hero para esta condição de tela. */
+  .hero {
+    min-height: 850px;
+    padding: 130px 24px 100px;
+    align-items: flex-start
+  }
+  /* Ajusta .hero-copy para esta condição de tela. */
+  .hero-copy {
+    width: 100%
+  }
+  /* Ajusta .hero h1 para esta condição de tela. */
+  .hero h1 {
+    font-size: clamp(68px,18vw,105px);
+    margin-top: 25px
+  }
+  /* Ajusta .intro para esta condição de tela. */
+  .intro {
+    max-width: 360px;
+    font-size: 13px
+  }
+  /* Ajusta .hero-art para esta condição de tela. */
+  .hero-art {
+    width: 490px;
+    height: 490px;
+    min-width: 490px;
+    min-height: 490px;
+    top: auto;
+    right: -165px;
+    bottom: 25px;
+    transform: none;
+    opacity: .7
+  }
+  /* Ajusta .hero-bottom para esta condição de tela. */
+  .hero-bottom {
+    padding: 0 20px;
+    height: 48px;
+    font-size: 7px
+  }
+  /* Ajusta .hero-bottom span:first-child para esta condição de tela. */
+  .hero-bottom span:first-child {
+    max-width: 48%
+  }
+  /* Ajusta .story para esta condição de tela. */
+  .story {
+    height: 420vh
+  }
+  /* Ajusta .stage para esta condição de tela. */
+  .stage {
+    min-height: 670px
+  }
+  /* Ajusta .stage-top para esta condição de tela. */
+  .stage-top {
+    top: 22px;
+    left: 20px;
+    right: 20px;
+    gap: 10px;
+    font-size: 7px
+  }
+  /* Ajusta .story-copy para esta condição de tela. */
+  .story-copy {
+    top: 100px;
+    left: 24px;
+    width: calc(100% - 48px)
+  }
+  /* Ajusta .story-copy h2 para esta condição de tela. */
+  .story-copy h2 {
+    font-size: clamp(38px,10vw,56px);
+    margin: 15px 0 10px
+  }
+  /* Ajusta .story-copy>p:last-of-type para esta condição de tela. */
+  .story-copy>p:last-of-type {
+    max-width: 380px;
+    font-size: 11px;
+    line-height: 1.65
+  }
+  /* Ajusta .steps para esta condição de tela. */
+  .steps {
+    margin-top: 16px
+  }
+  /* Ajusta .visual para esta condição de tela. */
+  .visual {
+    width: 112vw;
+    height: 370px;
+    min-height: 370px;
+    top: auto;
+    bottom: 73px;
+    right: -12vw;
+    transform: none
+  }
+  /* Ajusta .orb para esta condição de tela. */
+  .orb {
+    width: 44%;
+    left: 30%;
+    top: 3%
+  }
+  /* Ajusta .code para esta condição de tela. */
+  .code {
+    width: 48%
+  }
+  /* Ajusta .html-panel para esta condição de tela. */
+  .html-panel {
+    left: 2%;
+    top: 8%
+  }
+  /* Ajusta .css-panel para esta condição de tela. */
+  .css-panel {
+    right: 1%;
+    top: 18%
+  }
+  /* Ajusta .browser para esta condição de tela. */
+  .browser {
+    width: 83%;
+    left: 9%
+  }
+  /* Ajusta .browser-page para esta condição de tela. */
+  .browser-page {
+    padding: 11px 12px
+  }
+  /* Ajusta .mock-hero para esta condição de tela. */
+  .mock-hero {
+    padding: 12px 2px 9px;
+    gap: 8px
+  }
+  /* Ajusta .mock-art para esta condição de tela. */
+  .mock-art {
+    height: 85px
+  }
+  /* Ajusta .mock-cards i para esta condição de tela. */
+  .mock-cards i {
+    height: 35px
+  }
+  /* Ajusta .panel-head para esta condição de tela. */
+  .panel-head {
+    height: 31px;
+    padding: 0 8px;
+    gap: 6px;
+    font-size: 7px
+  }
+  /* Ajusta .code-lines para esta condição de tela. */
+  .code-lines {
+    padding: 9px 7px 4px
+  }
+  /* Ajusta .code-lines p para esta condição de tela. */
+  .code-lines p {
+    font-size: 6px;
+    margin-bottom: 8px
+  }
+  /* Ajusta .code-lines small para esta condição de tela. */
+  .code-lines small {
+    width: 16px;
+    font-size: 6px
+  }
+  /* Ajusta .panel-foot para esta condição de tela. */
+  .panel-foot {
+    padding: 7px;
+    font-size: 6px
+  }
+  /* Ajusta .stage-bottom para esta condição de tela. */
+  .stage-bottom {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    font-size: 7px
+  }
+  /* Ajusta .hint para esta condição de tela. */
+  .hint {
+    display: none
+  }
+  /* Ajusta .concepts para esta condição de tela. */
+  .concepts {
+    padding: 85px 24px 45px
+  }
+  /* Ajusta .section-head h2 para esta condição de tela. */
+  .section-head h2 {
+    font-size: clamp(46px,13vw,72px)
+  }
+  /* Ajusta .section-head>p:last-child para esta condição de tela. */
+  .section-head>p:last-child {
+    font-size: 12px
+  }
+  /* Ajusta .table-wrap para esta condição de tela. */
+  .table-wrap {
+    margin-top: 38px
+  }
+  /* Ajusta .final-card para esta condição de tela. */
+  .final-card {
+    margin-top: 65px;
+    min-height: 410px;
+    padding: 27px 22px
+  }
+  /* Ajusta .final-card h2 para esta condição de tela. */
+  .final-card h2 {
+    font-size: clamp(35px,10vw,54px)
+  }
+  /* Ajusta .final-card>p:not(.eyebrow) para esta condição de tela. */
+  .final-card>p:not(.eyebrow) {
+    font-size: 12px
+  }
+  /* Ajusta .final-card>.eyebrow span para esta condição de tela. */
+  .final-card>.eyebrow span {
+    display: none
+  }
+  /* Ajusta .final-orbit para esta condição de tela. */
+  .final-orbit {
+    width: 250px;
+    height: 250px;
+    top: auto;
+    bottom: -100px;
+    transform: none;
+    opacity: .55
+  }
+  /* Ajusta footer para esta condição de tela. */
+  footer {
+    padding: 22px 20px;
+    flex-wrap: wrap;
+    font-size: 7px
+  }
+  /* Ajusta footer>span:nth-child(2) para esta condição de tela. */
+  footer>span:nth-child(2) {
+    order: 3;
+    width: 100%
+  }
+}
+
+
+/* ACESSIBILIDADE — preferência por movimento reduzido */
+/* Media query: reduz animações e transições conforme a preferência do sistema. */
+@media(prefers-reduced-motion:reduce) {
+  /* Ajusta *,*:before,*:after para esta condição de tela. */
+  *,*:before,*:after {
+    scroll-behavior: auto!important;
+    animation-duration: .01ms!important;
+    animation-iteration-count: 1!important;
+    transition-duration: .01ms!important
+  }
+}
+
+
+/* MISSÃO 02 — integração com Bootstrap sem substituir os estilos da narrativa. */
+/* O Bootstrap redefine estilos básicos. Estas regras recuperam a base usada no projeto. */
+body {
+  font-size: 16px;
+  line-height: normal;
+}
+
+/* Mantém as margens padrão dos parágrafos; regras mais específicas continuam prevalecendo. */
+p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Evita a cor azul padrão do Bootstrap ao passar o ponteiro sobre links da narrativa. */
+a:hover {
+  color: inherit;
+}
+
+/* Mantém os textos centralizados na altura das células, como na tabela original. */
+th,
+td {
+  vertical-align: middle;
+}
+
+/* Nos exemplos visuais, label é apenas parte da ilustração, sem função de campo. */
+.code-lines label {
+  display: inline;
+}
+
+/* MENU — usa a estrutura navbar do Bootstrap e mantém todos os links acessíveis. */
+.topbar .container-fluid {
+  gap: 12px;
+}
+
+/* Identifica o projeto ao lado da marca no cabeçalho. */
+.project-name {
+  color: var(--muted);
+  font: 9px var(--mono);
+  letter-spacing: .07em;
+}
+
+/* Personaliza os links do Bootstrap com as cores e a fonte do projeto. */
+.topbar .nav-link {
+  padding: 16px 0;
+  color: #c5c7cf;
+  font-size: 10px;
+}
+
+.topbar .nav-link:hover,
+.topbar .nav-link:focus-visible,
+.site-footer a:hover {
+  color: var(--lime);
+}
+
+/* Um contorno visível ajuda a acompanhar a navegação pelo teclado. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 4px;
+}
+
+/* HERO — inclui a chamada para a MDN e mantém o convite para a narrativa. */
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.hero-actions .scroll-cue {
+  margin-top: 24px;
+}
+
+/* Botão compartilhado pelo link externo, formulário e página de agradecimento. */
+.project-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 44px;
+  padding: 14px 18px;
+  border: 1px solid var(--lime);
+  border-radius: 4px;
+  background: var(--lime);
+  color: var(--bg);
+  font: 500 10px var(--mono);
+  letter-spacing: .05em;
+  text-align: left;
+}
+
+.project-button:hover,
+.project-button:focus-visible,
+.project-button:active {
+  border-color: #d7ff88;
+  background: #d7ff88;
+  color: var(--bg);
+}
+
+/* CONTEÚDO EM DUAS COLUNAS — a largura das colunas é definida pelo Bootstrap. */
+/* Retira só o limite extra do container para alinhar os cartões com a tabela existente. */
+.learning-content.container {
+  max-width: none;
+  margin-top: 40px;
+  padding: 0;
+}
+
+/* h-100 no HTML faz os dois cartões preencherem a altura disponível na linha. */
+.learning-card {
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #101218;
+}
+
+.learning-card .eyebrow {
+  margin-top: 0;
+}
+
+.learning-card h3 {
+  margin: 20px 0 18px;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.04em;
+}
+
+.learning-card > p:not(.eyebrow) {
+  color: #a6a8b3;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.learning-card > p:last-child {
+  margin-bottom: 0;
+}
+
+.learning-card strong {
+  color: var(--lime);
+}
+
+/* CONTATO — reaproveita a paleta escura, as bordas e os detalhes verdes. */
+.contact-section {
+  padding: 100px 10vw 90px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.contact-section > .container {
+  max-width: none;
+  padding: 0;
+}
+
+.contact-section h2 {
+  margin: 20px 0;
+  color: var(--text);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.06em;
+}
+
+.contact-description {
+  max-width: 440px;
+  color: #a6a8b3;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+/* Explica o caráter demonstrativo do formulário sem sugerir envio real. */
+.form-note {
+  max-width: 440px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.contact-form {
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #101218;
+}
+
+.contact-form .form-label {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.contact-form .form-control {
+  padding: 12px;
+  border: 1px solid #ffffff30;
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--main);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Destaca o campo em uso para facilitar o preenchimento pelo mouse ou teclado. */
+.contact-form .form-control:focus {
+  border-color: var(--lime);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 0 0 3px #c6ff4d20;
+}
+
+.contact-form textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* Reserva espaço para o aviso e evita que o botão salte quando surgir um erro. */
+.form-error {
+  min-height: 1.5em;
+  margin: 0 0 16px;
+  color: #ffb4ab;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* RODAPÉ — as classes row e col-md-* distribuem seu conteúdo. */
+.site-footer {
+  display: block;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.footer-description {
+  margin: 0;
+}
+
+.site-footer nav a {
+  color: #a6a8b3;
+}
+
+.site-footer nav a:hover {
+  color: var(--lime);
+}
+
+/* AGRADECIMENTO — a mesma identidade visual em uma página sem animações novas. */
+.thanks-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100svh - 100px);
+  padding: 150px 24px 80px;
+}
+
+.thanks-card {
+  width: 100%;
+  max-width: 760px;
+  padding: clamp(26px, 5vw, 65px);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: radial-gradient(ellipse at 90% 48%, #7c68ff20, transparent 60%), #101218;
+}
+
+.thanks-card h1 {
+  margin: 28px 0;
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 600;
+  line-height: .98;
+  letter-spacing: -.075em;
+}
+
+.thanks-card h1 em {
+  color: var(--lime);
+  font-style: normal;
+}
+
+.thanks-card > p:not(.eyebrow) {
+  color: #a6a8b3;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.thanks-card .project-button {
+  margin-top: 16px;
+}
+
+/* RESPONSIVIDADE DAS ADIÇÕES — coincide com o limite md do Bootstrap. */
+@media (max-width: 767.98px) {
+  .topbar .project-name {
+    display: none;
+  }
+
+  .contact-section {
+    padding: 75px 24px 55px;
+  }
+
+  .learning-card h3 {
+    font-size: 20px;
+  }
+}
+
+/* Em celulares estreitos, o menu ocupa uma segunda linha, sem precisar de JavaScript. */
+@media (max-width: 575.98px) {
+  .topbar {
+    height: auto;
+    min-height: 100px;
+    padding: 12px 20px;
+  }
+
+  .topbar .container-fluid {
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .topbar .navbar-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero {
+    min-height: 940px;
+  }
+}
