@@ -1,254 +1,112 @@
 <!doctype html>
 <html lang="pt-BR">
-  <!-- Metadados do documento e ligação com a folha de estilos style.css. -->
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#08090d">
     <title>Do Código à Tela</title>
-    <!-- O Bootstrap vem antes do CSS próprio para permitir a personalização do visual. -->
+    <!-- O Bootstrap organiza as colunas; o CSS próprio personaliza as cores e os espaços. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <!-- defer executa o JavaScript somente depois que o HTML estiver pronto. -->
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <!-- Cabeçalho com Bootstrap: os três links ficam visíveis e mudam de linha no celular. -->
-    <header class="topbar navbar navbar-expand-md" data-bs-theme="dark">
-      <nav class="container-fluid p-0" aria-label="Navegação principal">
-        <a class="brand" href="#inicio"><span aria-hidden="true">✳</span> LAB/WEB</a>
-        <span class="project-name">Do Código à Tela</span>
-        <!-- flex-row mantém os links lado a lado; flex-wrap permite quebrar a linha. -->
-        <ul class="navbar-nav flex-row flex-wrap gap-3">
-          <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
-          <li class="nav-item"><a class="nav-link" href="#conteudo">Conteúdo</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-        </ul>
-      </nav>
+    <!-- TOPO: identificação do projeto e marca. -->
+    <header class="topbar">
+      <div class="container d-flex justify-content-between align-items-center gap-3">
+        <div>
+          <a class="brand" href="#inicio"><span aria-hidden="true">✳</span> LAB/WEB</a>
+          <p class="project-name">Do Código à Tela</p>
+        </div>
+        <span class="academic-label">PROJETO ACADÊMICO<br>DESENVOLVIMENTO FRONT-END</span>
+      </div>
     </header>
-    <!-- Conteúdo principal da experiência. -->
+
+    <!-- MENU: cada link aponta para o ID de uma seção desta página. -->
+    <nav class="menu" aria-label="Navegação principal">
+      <div class="container d-flex flex-wrap gap-4">
+        <a href="#inicio">Início</a>
+        <a href="#conteudo">Conteúdo</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+
     <main>
-      <!-- Hero: apresentação inicial, ilustração e link para explorar a narrativa. -->
-      <section class="hero" id="inicio">
-        <div class="grid">
-        </div>
-        <div class="hero-copy">
-          <p class="eyebrow"><i></i> UMA EXPERIÊNCIA SOBRE DESENVOLVIMENTO WEB</p>
-          <h1>Do código<br><em>à tela.</em></h1>
-          <p class="intro">Toda experiência digital começa com uma estrutura. Role a página e descubra como ela ganha forma, identidade e movimento.</p>
-          <div class="hero-actions">
-            <!-- Link externo real: abre a documentação em outra aba. -->
-            <a class="btn project-button" href="https://developer.mozilla.org/pt-BR/docs/Web" target="_blank" rel="noopener noreferrer">APRENDER NA MDN <span aria-hidden="true">↗</span></a>
-            <a class="scroll-cue" href="#historia"><span class="mouse"><i></i></span> ROLE PARA EXPLORAR <b>↓</b></a>
-          </div>
-        </div>
-        <!-- Ilustração decorativa inicial, ocultada dos leitores de tela por aria-hidden. -->
-        <div class="hero-art" aria-hidden="true">
-          <div class="orbit orbit-a">
-          </div>
-          <div class="orbit orbit-b">
-          </div>
-          <div class="orbit orbit-c">
-          </div>
-          <div class="hero-glow">
-          </div>
-          <div class="hero-core">&lt;/&gt;</div>
-          <div class="chip chip-a"><i></i> HTML <small>estrutura</small></div>
-          <div class="chip chip-b"><i></i> CSS <small>identidade</small></div>
-          <div class="chip chip-c"><i></i> UI <small>experiência</small></div>
-        </div>
-        <div class="hero-bottom">
-          <span>UMA IDEIA, CAMADAS DE POSSIBILIDADES.</span>
-          <span>SCROLL STORYTELLING <b>●</b></span>
-        </div>
-      </section>
-      <!-- Narrativa: quatro cenas controladas pela rolagem e pelo JavaScript ao final do HTML. -->
-      <section class="story" id="historia" aria-label="Narrativa do código à experiência">
-        <div class="stage" id="stage" data-scene="1">
-          <div class="grid">
-          </div>
-          <!-- Indicadores da cena e barra de progresso atualizados pelo script. -->
-          <div class="stage-top">
-            <span>PROCESSO CRIATIVO / <b id="stageIndex">01</b></span>
-            <div class="track">
-              <i id="progressBar"></i>
-            </div>
-            <span id="progressValue">00%</span>
-          </div>
-          <!-- Textos e marcadores da cena atual. -->
-          <div class="story-copy">
-            <p class="eyebrow"><i></i> <span id="sceneLabel">01 / ESTRUTURA</span></p>
-            <h2 id="sceneTitle">Tudo começa<br>com uma estrutura.</h2>
-            <p id="sceneText">O HTML organiza o conteúdo e define o papel de cada elemento na página.</p>
-            <!-- Marcadores visuais das quatro cenas; a classe active identifica a cena atual. -->
-            <div class="steps">
-              <i class="active"></i>
-              <i></i>
-              <i></i>
-              <i></i>
-            </div>
-          </div>
-          <!-- Composição visual da narrativa: símbolo, painéis de código e navegador simulado. -->
-          <div class="visual">
-            <div class="orb" id="orb">
-              <div class="orb-ring">
-              </div>
-              <div class="orb-ring second">
-              </div>
-              <div class="orb-core">&lt;/&gt;</div>
-              <i class="particle"></i>
-            </div>
-            <!-- Painel ilustrativo de HTML; o código exibido aqui é texto, não é executado. -->
-            <div class="code html-panel" id="htmlPanel">
-              <div class="panel-head"><span class="lights">● ● ●</span> index.html <b>HTML</b></div>
-              <div class="code-lines">
-                <p><small>01</small> <span>&lt;main&gt;</span></p>
-                <p><small>02</small> &nbsp; <span>&lt;h1&gt;</span>Olá, mundo.<span>&lt;/h1&gt;</span></p>
-                <p><small>03</small> &nbsp; <span>&lt;p&gt;</span>Uma ideia começa aqui.<span>&lt;/p&gt;</span></p>
-                <p><small>04</small> <span>&lt;/main&gt;</span></p>
-              </div>
-              <div class="panel-foot">● ESTRUTURA DEFINIDA</div>
-            </div>
-            <!-- Painel ilustrativo de CSS; as regras exibidas aqui são apenas exemplos visuais. -->
-            <div class="code css-panel" id="cssPanel">
-              <div class="panel-head"><span class="lights">● ● ●</span> style.css <b>CSS</b></div>
-              <div class="code-lines">
-                <p><small>01</small> <strong>main</strong> {</p>
-                <p><small>02</small> &nbsp; <em>color</em>: <label>#f5f5f7</label>;</p>
-                <p><small>03</small> &nbsp; <em>display</em>: <label>grid</label>;</p>
-                <p><small>04</small> }</p>
-              </div>
-              <div class="panel-foot purple">● IDENTIDADE APLICADA</div>
-            </div>
-            <!-- Janela ilustrativa que representa a composição final de uma página. -->
-            <div class="browser" id="browser">
-              <div class="browser-head">
-                <span class="lights">● ● ●</span>
-                <div>◈ &nbsp; experiencia.dev</div>
-                <b>•••</b>
-              </div>
-              <div class="browser-page">
-                <div class="mock-nav">
-                  <b><i></i> studio.</b>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <label></label>
-                </div>
-                <div class="mock-hero">
-                  <div>
-                    <small>● DESIGN QUE FAZ SENTIDO</small>
-                    <h3></h3>
-                    <h3 class="short"></h3>
-                    <p></p>
-                    <p class="short"></p>
-                    <button></button>
-                  </div>
-                  <div class="mock-art">
-                    <i></i>
-                    <b></b>
-                    <span>✳</span>
-                  </div>
-                </div>
-                <div class="mock-cards">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                </div>
+      <!-- DESTAQUE/HERO: apresentação e chamada para a documentação externa. -->
+      <section class="hero" id="inicio" aria-labelledby="titulo-principal">
+        <div class="container">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-8">
+              <p class="eyebrow">UMA IDEIA, MUITAS POSSIBILIDADES</p>
+              <h1 id="titulo-principal">Do código<br><em>à tela.</em></h1>
+              <p class="hero-description">Toda experiência digital começa com uma estrutura. Descubra como HTML, CSS e JavaScript transformam uma ideia em uma página web.</p>
+              <div class="d-flex flex-wrap gap-3">
+                <a class="btn button-main" href="https://developer.mozilla.org/pt-BR/docs/Web" target="_blank" rel="noopener noreferrer">Aprender na MDN <span aria-hidden="true">↗</span></a>
+                <a class="btn button-secondary" href="#conteudo">Explorar o conteúdo</a>
               </div>
             </div>
-          </div>
-          <div class="stage-bottom">
-            <span>HTML <b>+</b> CSS <b>+</b> IDEIA</span>
-            <span class="hint">— CONTINUE ROLANDO —</span>
-            <span id="stageCounter">01 / 04</span>
+            <div class="col-lg-4">
+              <aside class="hero-card" aria-label="As três tecnologias da página">
+                <span class="code-symbol" aria-hidden="true">&lt;/&gt;</span>
+                <h2>Uma ideia.<br>Três tecnologias.</h2>
+                <ul class="technology-list">
+                  <li><strong>HTML</strong><span>estrutura</span></li>
+                  <li><strong>CSS</strong><span>aparência</span></li>
+                  <li><strong>JavaScript</strong><span>interação</span></li>
+                </ul>
+              </aside>
+            </div>
           </div>
         </div>
       </section>
-      <!-- Seção de conceitos: apresentação das tecnologias usadas no desenvolvimento web. -->
-      <section class="concepts" id="conceitos">
-        <div class="section-head" id="conteudo">
-          <p class="eyebrow"><i></i> A BASE DE TUDO</p>
-          <h2>Três camadas.<br><em>Uma experiência.</em></h2>
-          <p>Uma página web combina diferentes tecnologias. Cada uma tem uma função — juntas, transformam informação em interação.</p>
-        </div>
-        <!-- container centraliza o conteúdo e fornece espaçamento lateral do Bootstrap. -->
-        <div class="container learning-content">
-          <!-- row organiza as colunas; g-4 cria espaço entre elas. Não é a classe decorativa .grid. -->
+
+      <!-- DUAS COLUNAS: container centraliza o conteúdo e row agrupa as colunas. -->
+      <section class="content-section" id="conteudo" aria-labelledby="titulo-conteudo">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">A BASE DE TUDO</p>
+            <h2 id="titulo-conteudo">Três camadas.<br><em>Uma experiência.</em></h2>
+            <p>Cada tecnologia tem uma função. Juntas, elas dão forma à página.</p>
+          </div>
           <div class="row g-4">
-            <!-- col-md-6 ocupa metade da linha a partir de 768 px; abaixo disso ocupa a linha inteira. -->
+            <!-- col-md-6 ocupa metade da linha a partir de 768 px; no celular ocupa a linha inteira. -->
             <div class="col-md-6">
-              <article class="learning-card h-100">
-                <p class="eyebrow"><i></i> ESTRUTURA + IDENTIDADE</p>
-                <h3>HTML e CSS: conteúdo com forma.</h3>
-                <p><strong>HTML</strong> organiza o que existe na página: títulos, parágrafos, links, imagens e formulários.</p>
-                <p><strong>CSS</strong> define como esse conteúdo aparece: cores, fontes, espaços e organização na tela.</p>
+              <article class="content-card h-100">
+                <p class="eyebrow">01 / ESTRUTURA E ESTILO</p>
+                <h3>HTML + CSS</h3>
+                <p>O <strong>HTML</strong> organiza o conteúdo: títulos, parágrafos, links e formulários.</p>
+                <p>O <strong>CSS</strong> define a aparência: cores, fontes, espaços e organização dos elementos na tela.</p>
+                <p class="card-example">Neste projeto: o HTML cria o título e o CSS deixa uma parte dele verde.</p>
               </article>
             </div>
-            <!-- A segunda col-md-6 completa a linha no computador e fica abaixo da primeira no celular. -->
             <div class="col-md-6">
-              <article class="learning-card h-100">
-                <p class="eyebrow"><i></i> COMPORTAMENTO + INTERAÇÃO</p>
-                <h3>JavaScript: a página responde.</h3>
-                <p><strong>JavaScript</strong> executa ações quando alguém interage com a página, como rolar a tela ou enviar um formulário.</p>
-                <p>Aqui, ele controla as cenas da narrativa e confere os campos do contato antes de abrir a página de agradecimento.</p>
+              <article class="content-card h-100">
+                <p class="eyebrow">02 / COMPORTAMENTO</p>
+                <h3>JavaScript</h3>
+                <p>O <strong>JavaScript</strong> permite que a página responda às ações de quem a utiliza.</p>
+                <p>Aqui, ele verifica os campos do formulário. Se houver um erro, mostra uma explicação; se os dados forem válidos, abre o agradecimento.</p>
+                <p class="card-example">Experimente preencher o formulário abaixo para ver esse comportamento.</p>
               </article>
             </div>
           </div>
-        </div>
-        <!-- Tabela comparativa com tecnologia, função e exemplo. -->
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>TECNOLOGIA</th>
-                <th>FUNÇÃO</th>
-                <th>EXEMPLO</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><small>01</small><b><i class="html-icon">&lt;/&gt;</i> HTML</b></td>
-                <td>Define a estrutura e organiza o conteúdo.</td>
-                <td><code>&lt;h1&gt;Título&lt;/h1&gt;</code></td>
-              </tr>
-              <tr>
-                <td><small>02</small><b><i class="css-icon">✳</i> CSS</b></td>
-                <td>Controla aparência, layout, cores e animações.</td>
-                <td><code>color: #ffffff;</code></td>
-              </tr>
-              <tr>
-                <td><small>03</small><b><i class="js-icon">JS</i> JavaScript</b></td>
-                <td>Adiciona lógica e comportamentos interativos.</td>
-                <td><code>addEventListener()</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- Encerramento da experiência e navegação de retorno ao início. -->
-        <div class="final-card">
-          <div class="final-orbit">
-            <i></i>
-            <b></b>
-          </div>
-          <p class="eyebrow"><i></i> FIM DA EXPERIÊNCIA <span>04 / 04</span></p>
-          <h2>O código constrói.<br><em>A experiência conecta.</em></h2>
-          <p>Uma boa página não é apenas o que vemos na tela. É a combinação entre estrutura, estilo e a forma como as pessoas interagem com ela.</p>
-          <a class="restart" href="#inicio">VOLTAR AO INÍCIO <b>↑</b></a>
         </div>
       </section>
-      <!-- Contato demonstrativo: a validação é local e não envia os dados para um servidor. -->
+
+      <!-- FORMULÁRIO: demonstração local, sem servidor ou envio de e-mail. -->
       <section class="contact-section" id="contato" aria-labelledby="titulo-contato">
         <div class="container">
           <div class="row g-4 align-items-start">
             <div class="col-md-6">
-              <p class="eyebrow"><i></i> VAMOS PRATICAR</p>
+              <p class="eyebrow">VAMOS PRATICAR</p>
               <h2 id="titulo-contato">Uma ideia começa<br>com uma conversa.</h2>
-              <p class="contact-description">Preencha os campos para experimentar a validação com JavaScript.</p>
-              <p class="form-note" id="aviso-contato">Este formulário é uma demonstração acadêmica. Os dados não são enviados nem armazenados e nenhum e-mail é disparado.</p>
+              <p>Preencha seu nome, e-mail e mensagem para experimentar a validação com JavaScript.</p>
+              <p class="form-note" id="aviso-contato">Este formulário é uma demonstração acadêmica. Os dados não são enviados para um servidor nem armazenados. Nenhum e-mail é disparado.</p>
             </div>
             <div class="col-md-6">
-              <!-- novalidate permite que o script.js apresente as mensagens de validação em português. -->
+              <!-- novalidate permite que o JavaScript apresente as mensagens de erro personalizadas. -->
               <form class="contact-form" id="formulario" aria-describedby="aviso-contato" novalidate>
-                <!-- Cada label aponta para um ID exclusivo. Os campos não possuem name para não compor dados de envio. -->
+                <!-- Os campos não têm name, pois esta demonstração não precisa enviar dados. -->
                 <div class="mb-3">
                   <label class="form-label" for="nome">Nome</label>
                   <input class="form-control" type="text" id="nome" autocomplete="name" aria-describedby="erro-formulario" required>
@@ -261,9 +119,9 @@
                   <label class="form-label" for="mensagem">Mensagem</label>
                   <textarea class="form-control" id="mensagem" rows="5" aria-describedby="erro-formulario" required></textarea>
                 </div>
-                <!-- role alert anuncia o erro também para quem utiliza leitor de tela. -->
+                <!-- O leitor de tela anuncia a mensagem de erro quando ela aparece. -->
                 <p class="form-error" id="erro-formulario" role="alert"></p>
-                <button class="btn project-button" type="submit">Enviar <span aria-hidden="true">↗</span></button>
+                <button class="btn button-main" type="submit">Enviar <span aria-hidden="true">↗</span></button>
                 <noscript><p class="form-note">Ative o JavaScript do navegador para validar os campos e continuar.</p></noscript>
               </form>
             </div>
@@ -271,135 +129,21 @@
         </div>
       </section>
     </main>
-    <!-- Rodapé com colunas Bootstrap: empilhado no celular e distribuído no computador. -->
+
+    <!-- RODAPÉ: identificação acadêmica, direitos autorais e links internos. -->
     <footer class="site-footer">
-      <div class="container-fluid p-0">
-        <div class="row gy-3 align-items-center">
-          <div class="col-md-3">
-            <a class="brand" href="#inicio"><span aria-hidden="true">✳</span> LAB/WEB</a>
-          </div>
-          <div class="col-md-6">
-            <p class="footer-description">PROJETO ACADÊMICO · HTML5 + CSS3 + BOOTSTRAP 5 + JAVASCRIPT</p>
-            <p class="footer-description">&copy; 2026 Do Código à Tela.</p>
-          </div>
-          <div class="col-md-3">
-            <nav class="d-flex flex-wrap gap-3 justify-content-md-end" aria-label="Navegação do rodapé">
-              <a href="#inicio">Início</a>
-              <a href="#conteudo">Conteúdo</a>
-              <a href="#contato">Contato</a>
-            </nav>
-          </div>
+      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div>
+          <p class="footer-brand">LAB/WEB · Do Código à Tela</p>
+          <p>Projeto acadêmico · Desenvolvimento Front-End para Web</p>
+          <p>&copy; 2026 Do Código à Tela.</p>
         </div>
+        <nav class="d-flex flex-wrap gap-3" aria-label="Navegação do rodapé">
+          <a href="#inicio">Início</a>
+          <a href="#conteudo">Conteúdo</a>
+          <a href="#contato">Contato</a>
+        </nav>
       </div>
     </footer>
-    <!-- JavaScript existente: controla a narrativa conforme a rolagem, sem arquivo externo. -->
-    <script>
-      // Executa a lógica em um escopo próprio, sem expor estas variáveis ao restante da página.
-      (() => {
-        // Guarda referências aos elementos que terão textos, estilos e indicadores atualizados.
-        const story = document.querySelector(".story");
-        const stage = document.getElementById("stage");
-        const html = document.getElementById("htmlPanel");
-        const css = document.getElementById("cssPanel");
-        const browser = document.getElementById("browser");
-        const orb = document.getElementById("orb");
-        const bar = document.getElementById("progressBar");
-        const value = document.getElementById("progressValue");
-        const index = document.getElementById("stageIndex");
-        const counter = document.getElementById("stageCounter");
-        const label = document.getElementById("sceneLabel");
-        const title = document.getElementById("sceneTitle");
-        const text = document.getElementById("sceneText");
-        const dots = [...document.querySelectorAll(".steps i")];
-        // Cada cena reúne a identificação, o título com quebra de linha e o texto explicativo.
-        const scenes = [
-          [
-            "01 / ESTRUTURA",
-            "Tudo começa<br>com uma estrutura.",
-            "O HTML organiza o conteúdo e define o papel de cada elemento na página."
-          ],
-          [
-            "02 / ESTILO",
-            "A estrutura<br>ganha identidade.",
-            "O CSS transforma elementos simples em uma interface com cor, hierarquia e personalidade."
-          ],
-          [
-            "03 / COMPOSIÇÃO",
-            "As peças começam<br>a conversar.",
-            "Layout, espaçamento e tipografia organizam a informação para criar uma experiência clara."
-          ],
-          [
-            "04 / EXPERIÊNCIA",
-            "E a página<br>ganha vida.",
-            "Movimento e interação conduzem o olhar e transformam a navegação em uma narrativa."
-          ]
-        ];
-        // Limita um número ao intervalo de 0 a 1, usado como progresso da narrativa.
-        const clamp = n => Math.max(0, Math.min(1, n));
-        // Converte um trecho do progresso em uma transição de 0 a 1.
-        const range = (n, a, b) => clamp((n - a) / (b - a));
-        // Guarda a cena atual e indica se já existe uma atualização agendada.
-        let current = -1,
-          ticking = false;
-
-        // Calcula o progresso da rolagem e atualiza a apresentação da narrativa.
-        function update() {
-          // Lê a posição da seção na tela e calcula quanto de sua altura já foi percorrido.
-          const rect = story.getBoundingClientRect();
-          const maxScroll = Math.max(1, story.offsetHeight - innerHeight);
-          const p = clamp(-rect.top / maxScroll);
-          // Divide o progresso em quatro cenas, numeradas internamente de 0 a 3.
-          const scene = Math.min(3, Math.floor(p * 4));
-          // Atualiza a barra, a porcentagem e os números exibidos no palco.
-          bar.style.width = (p * 100) + "%";
-          value.textContent = String(Math.round(p * 100)).padStart(2, "0") + "%";
-          index.textContent = String(scene + 1).padStart(2, "0");
-          counter.textContent = String(scene + 1).padStart(2, "0") + " / 04";
-
-          // Calcula a entrada e a saída dos painéis; os intervalos controlam cada transição.
-          const hi = range(p, .03, .16) * (1 - range(p, .34, .48));
-          const ci = range(p, .24, .40) * (1 - range(p, .60, .72));
-          const bi = range(p, .43, .68);
-          // Aplica transparência, deslocamento, rotação e escala aos elementos visuais.
-          html.style.opacity = hi;
-          html.style.transform = `translate(${(-80 + range(p,.03,.16)*80 - range(p,.36,.49)*35)}px, ${36-range(p,.03,.16)*36}px) rotate(${-5+range(p,.03,.16)*5}deg)`;
-          css.style.opacity = ci;
-          css.style.transform = `translate(${85-range(p,.24,.40)*85+range(p,.61,.74)*25}px, ${55-range(p,.24,.40)*55}px) rotate(${5-range(p,.24,.40)*5}deg)`;
-          browser.style.opacity = bi;
-          browser.style.transform = `translateY(${90-bi*90}px) scale(${.82+bi*.18})`;
-          orb.style.opacity = 1 - range(p,.48,.76)*.75;
-          orb.style.transform = `scale(${1.05-bi*.38}) rotate(${p*65}deg)`;
-
-          // Troca os textos e o marcador ativo somente quando a cena muda.
-          if (scene !== current) {
-            current = scene;
-            label.textContent = scenes[scene][0];
-            // Usa innerHTML para manter a quebra <br> dos títulos definidos nas cenas.
-            title.innerHTML = scenes[scene][1];
-            text.textContent = scenes[scene][2];
-            // Atualiza o atributo data-scene; a classe active destaca o marcador correspondente.
-            stage.dataset.scene = String(scene + 1);
-            dots.forEach((dot, i) => dot.classList.toggle("active", i === scene));
-          }
-          // Libera o agendamento da próxima atualização após concluir este quadro.
-          ticking = false;
-        }
-        // Agrupa os eventos em uma atualização por quadro de animação do navegador.
-        function requestUpdate() {
-          if (!ticking) {
-            requestAnimationFrame(update);
-            ticking = true;
-          }
-        }
-        // Escuta a rolagem sem bloqueá-la; também recalcula ao redimensionar e terminar o carregamento.
-        addEventListener("scroll", requestUpdate, { passive: true });
-        addEventListener("resize", requestUpdate);
-        addEventListener("load", requestUpdate);
-        // Prepara a cena inicial assim que o script é executado.
-        update();
-      })();
-    </script>
-    <!-- O script de validação fica separado; a narrativa original permanece acima. -->
-    <script src="script.js"></script>
   </body>
 </html>

@@ -5,9 +5,9 @@ Projeto acadêmico da disciplina Desenvolvimento Front-End para Web. A landing p
 ## Tecnologias
 
 - HTML5 para a estrutura e o conteúdo.
-- CSS3 para o tema escuro, os detalhes verdes, as animações e a responsividade.
+- CSS3 para o tema escuro, os detalhes verdes, a responsividade.
 - Bootstrap 5.3.8 via CDN para a navegação, as colunas e os campos do formulário.
-- JavaScript puro para a narrativa durante a rolagem e a validação do formulário.
+- JavaScript puro para a validação do formulário.
 
 ## Como abrir
 
@@ -21,8 +21,8 @@ Não é necessário instalar dependências, iniciar um servidor ou configurar um
 
 | Arquivo | Função |
 | --- | --- |
-| `index.html` | Página principal e JavaScript original da narrativa visual. |
-| `style.css` | Aparência, animações e ajustes para diferentes tamanhos de tela. |
+| `index.html` | Página principal com topo, menu, hero, conteúdo, formulário e rodapé. |
+| `style.css` | Aparência e ajustes para diferentes tamanhos de tela. |
 | `script.js` | Validação dos campos Nome, E-mail e Mensagem. |
 | `obrigado.html` | Agradecimento e link de retorno à página inicial. |
 
@@ -32,4 +32,4 @@ O formulário verifica campos vazios, espaços e o formato do e-mail. Se os dado
 
 ## Navegação
 
-O menu permite acessar Início, Conteúdo e Contato. A página inclui uma narrativa visual por rolagem e um link para a documentação MDN Web Docs.
+O menu permite acessar Início, Conteúdo e Contato. A página inclui duas colunas de conteúdo e um link para a documentação MDN Web Docs.
